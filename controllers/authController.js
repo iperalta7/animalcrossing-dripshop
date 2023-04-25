@@ -19,7 +19,7 @@ router.get("/login", (req, res) => {
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
     
-    User.findOne(username, (error, user) => {
+    User.findUser(username, (error, user) => {
         if (error) {
             console.error(error);
             return res.status(500).send("Server error");
