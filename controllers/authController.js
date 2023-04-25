@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const session = require("express-session");
+
 
 // Import the User model
 const User = require("../models/User.js");
@@ -42,15 +44,17 @@ router.post("/login", (req, res) => {
     }
 });
 });
-// Handle logout
+
+// Logout route
 router.get("/logout", (req, res) => {
-    req.session.destroy(err => {
+    req.session.destroy((err) => {
         if (err) {
-            return res.status(500).send("Server error");
+            console.error(err);
         }
-        res.clearCookie("connect.sid");
-        res.redirect("/auth/login");
+
+        res.redirect("/");
     });
 });
+
 
 module.exports = router;
