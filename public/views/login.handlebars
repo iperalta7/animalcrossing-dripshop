@@ -1,0 +1,15 @@
+<form action="/login" method="post" enctype="application/json">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username">
+    <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+  </div>
+  {{#if error}}
+  <div class="alert alert-danger">{{error}}</div>
+  {{/if}}
+  <button type="submit" class="btn btn-reverse">Login</button>
+</form>
