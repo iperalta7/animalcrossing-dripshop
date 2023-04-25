@@ -25,12 +25,19 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index">Home</a></li>
-        <li><a href="shop">Shop</a></li>
-        <li><a href="cart">Cart</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+        {{#if isLoggedIn}}
+          <li><a href="shop">Shop</a></li>
+          <li><a href="orders">Orders</a></li>
+          <li><a href="cart">Cart</a></li>
+          <li><a href="/logout">Logout</a></li>
+          </ul>
+        {{else}}
+        </ul>
+          <ul class="nav navbar-nav navbar-right">
         <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
+      {{/if}}
+      
     </div>
   </div>
 </nav>

@@ -7,18 +7,14 @@ const User = require("../models/User");
 
 // Show the login page
 router.get("/shop", (req, res) => {
-    res.render("shop");
+    res.render("shop", 
+    {title: "Drip Shop Page",
+    page_title:"Animal Drip Shop!",
+    isLoggedIn: req.session.isLoggedIn}
+    );
 });
 
 // Handle logout
-router.get("/logout", (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).send("Server error");
-        }
-        res.clearCookie("connect.sid");
-        res.redirect("/auth/login");
-    });
-});
+
 
 module.exports = router;
