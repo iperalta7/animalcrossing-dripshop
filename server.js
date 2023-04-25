@@ -1,13 +1,12 @@
 // Required modules for web server
 const express = require('express');
-
-const database = require("./database");
+const session = require("express-session");
 
 var app = express(); // init application as an express app
 
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: false }))
-const port = 8080;  //set port number
+const PORT = 8080;  //set port number
 
 // create path to the dir w files
 const dir = __dirname + '/public/';
@@ -33,6 +32,13 @@ app.use(express.static(dir));
 app.use(express.static(dir + '/css'));
 
 
+// Set up session middleware
+app.use(session({
+    secret: "my-secret",
+    resave: false,
+    saveUninitialized: false
+}));
+
 // Import routes
 const authRoutes = require("./controllers/authController");
 const productRoutes = require("./controllers/productController");
@@ -51,7 +57,8 @@ app.get("/", (req, res) => {
 app.get("/index", (req, res) => {
     res.render("index",{
         "title": "Home page",
-        "page_title":"Welcome to Animal Drip Shop!"
+        "page_title":"Welcome to Animal Drip Shop!",
+        isLoggedIn: req.session.isLoggedIn
     });
 });
 
@@ -63,7 +70,7 @@ app.use("/", orderRoutes);
 
 var server = app.listen(8081, function (){
   var host = server;
-  var port = server.address().port;
+  var port = server.address().PORT;
   console.log("Example app listening at http://localhost:" + port);
 })
 
