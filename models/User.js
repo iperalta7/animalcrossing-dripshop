@@ -17,7 +17,7 @@ class User {
      * @param {function} callback - A callback function to handle the result.
      */
     static findUser(username, callback) {
-        const query = "SELECT * FROM customers WHERE username = ? LIMIT 1";
+        const query = "SELECT * FROM customer WHERE username = ? LIMIT 1";
 
         connection.query(query, [username], (error, rows) => {
             if (error) {
