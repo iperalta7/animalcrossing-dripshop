@@ -1,0 +1,38 @@
+<div class="container">
+    <form action="/shop" method="post" class="my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label for="designerEmail">Designer Email</label>
+                    <select class="form-control" name="designerEmail" id="designerEmail">
+                        <option value="*">Select a designer</option>
+                        <option value="ccastillo0318@uri.edu">ccastillo0318@uri.edu</option>
+                        <option value="danieldiazp@uri.edu">danieldiazp@uri.edu</option>
+                        <option value="iperalta@uri.edu">iperalta@uri.edu</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Filter by Designer</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row justify-content-center">
+        {{#each outfits}}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card bg-info text-white">
+                    <img src="clothes.png" class="card-img-top" style="width:200px" alt="Outfit Image">
+                    <div class="card-header">Outfit #{{fitID}}</div>
+                    <div class="card-body">
+                        <p class="card-text">Bottom: {{bottomName}}</p>
+                        <p class="card-text">Top: {{topName}}</p>
+                        <p class="card-text">Shoe: {{shoeName}}</p>
+                        <p class="card-text">Hardware: {{hwName}}</p>
+                        <p class="card-text">Bag: {{bagName}}</p>
+                        <button type="button" class="btn btn-light" onclick="addToCart({{fitID}})">Add to Cart</button>
+                    </div>
+                    <div class="card-footer bg-light text-dark">Designer: {{designerEmail}}</div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

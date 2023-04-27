@@ -30,6 +30,7 @@ app.set('view engine', 'handlebars');
 // tell express what directores it needs to look into
 app.use(express.static(dir));
 app.use(express.static(dir + '/css'));
+app.use(express.static(dir + '/assets'));
 
 
 // Set up session middleware
@@ -43,7 +44,7 @@ app.use(
 
 // Import routes
 const authRoutes = require("./controllers/authController");
-const productRoutes = require("./controllers/productController");
+const productRoutes = require("./controllers/shopController");
 const cartRoutes = require("./controllers/cartController");
 const orderRoutes = require("./controllers/orderController");
 
