@@ -5,3 +5,15 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  {{#if isLoggedIn}}
+    <div class="alert alert-success" role="alert">
+      Welcome! You are logged in.
+    </div>
+  {{else}}
+    <div class="alert alert-warning" role="alert">
+      Welcome! Please <a href="/login">log in</a> to access all features.
+    </div>
+  {{/if}}
+</div>
