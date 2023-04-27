@@ -13,7 +13,6 @@
                         <th>Shoe</th>
                         <th>Hardware</th>
                         <th>Bag</th>
-                        <th>Price</th>
                         <th>Remove</th>
                     </tr>
                 </thead>
@@ -27,10 +26,9 @@
                         <td>{{this.shoeName}}</td>
                         <td>{{this.hwName}}</td>
                         <td>{{this.bagName}}</td>
-                        <td>${{this.price}}</td>
                         <td>
-                            <form action="/cart/{{this.cartID}}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
+                            <form action="/cart/delete" method="POST">
+                                  <input type="hidden" name="fitID" value="{{fitID}}">
                                 <button type="submit" class="btn btn-danger">Remove</button>
                             </form>
                         </td>

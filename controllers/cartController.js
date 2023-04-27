@@ -12,8 +12,8 @@ router.get("/cart", (req, res) => {
           return res.status(500).send("Server error");
         }
         res.render("cart", {
-          title: "Drip Shop Page",
-          page_title: "Animal Drip Shop!",
+          title: `${req.session.username}'s Cart`,
+          page_title: `${req.session.username}'s Cart`,
           isLoggedIn: req.session.isLoggedIn,
           cart,
         });
@@ -30,6 +30,19 @@ router.post("/cart", (req, res) => {
         return res.status(500).send("Server error");
       }
       res.redirect("/shop");
+    });
+  });
+
+  router.post("/cart/delete", (req, res) => {
+    const custID = req.session.username;
+    const fitID = req.body.fitID;
+    // add the fitID to the cart table in the database
+    Cart.deleteFromCart(custID, fitID, (error, result) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
+      }
+      res.redirect("/cart");
     });
   });
 
