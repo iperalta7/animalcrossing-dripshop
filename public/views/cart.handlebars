@@ -1,44 +1,55 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2>Shopping Cart</h2>
-            {{#if cart.length}}
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Outfit ID</th>
-                        <th>Designer</th>
-                        <th>Bottom</th>
-                        <th>Top</th>
-                        <th>Shoe</th>
-                        <th>Hardware</th>
-                        <th>Bag</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each cart}}
-                    <tr>
-                        <td>{{this.fitID}}</td>
-                        <td>{{this.designerEmail}}</td>
-                        <td>{{this.bottomName}}</td>
-                        <td>{{this.topName}}</td>
-                        <td>{{this.shoeName}}</td>
-                        <td>{{this.hwName}}</td>
-                        <td>{{this.bagName}}</td>
-                        <td>
-                            <form action="/cart/delete" method="POST">
-                                  <input type="hidden" name="fitID" value="{{fitID}}">
-                                <button type="submit" class="btn btn-danger">Remove</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-            {{else}}
-            <p>Your cart is empty.</p>
-            {{/if}}
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Shopping Cart</h2>
+      {{#if cart.length}}
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Outfit ID</th>
+              <th>Designer</th>
+              <th>Bottom</th>
+              <th>Top</th>
+              <th>Shoe</th>
+              <th>Hardware</th>
+              <th>Bag</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each cart}}
+              <tr>
+                <td>{{this.fitID}}</td>
+                <td>{{this.designerEmail}}</td>
+                <td>{{this.bottomName}}</td>
+                <td>{{this.topName}}</td>
+                <td>{{this.shoeName}}</td>
+                <td>{{this.hwName}}</td>
+                <td>{{this.bagName}}</td>
+                <td>
+                  <form action="/cart/delete" method="POST">
+                    <input type="hidden" name="fitID" value="{{fitID}}" />
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                  </form>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p>Your cart is empty.</p>
+      {{/if}}
     </div>
+
+  </div>
+
+  <div class="row justify-content-center">
+    <form action="/order/create" method="POST">
+      {{#each cart}}
+        <input type="hidden" name="fitIDs[]" value="{{fitID}}" />
+      {{/each}}
+      <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
+  </div>
+
 </div>

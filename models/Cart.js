@@ -42,6 +42,18 @@ class Cart {
         callback(null, result);
       });
     }
+
+    static deleteCartByCustomer(custID, callback) {
+      connection.query('DELETE FROM cart WHERE custID = ?', [custID], (error, result) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(null, result);
+        }
+      });
+    }
   }
+
+  
 
 module.exports = Cart;
