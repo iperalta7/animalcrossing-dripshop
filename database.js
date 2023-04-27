@@ -3,11 +3,12 @@ const mysql = require('mysql2');
 
 //create the connection the mysql server (LOCAL ONLY)
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: '10.10.211.225',
     user: 'User',
     password: 'User1234',
     database: '436proj'
   });
+  
   
   // test mysql database connection
   connection.connect((err) => {
