@@ -15,17 +15,13 @@ class Shop {
     SELECT 
     o.fitID,
     o.designerEmail,
-    b.bottomName as bottomName,
-    t.topName as topName,
-    s.shoeName as shoeName,
-    h.hwName as hwName,
-    bg.bagName as bagName
-  FROM outfit o
-  JOIN bottoms b ON o.bottomID = b.bottomID
-  JOIN tops t ON o.topID = t.topID
-  JOIN shoes s ON o.shoeID = s.shoeID
-  JOIN headwear h ON o.hwID = h.hwID
-  JOIN bags bg ON o.bagID = bg.bagID;
+    (SELECT bottomName FROM bottoms WHERE bottoms.bottomID = o.bottomID) AS bottomName,
+    (SELECT topName FROM tops WHERE tops.topID = o.topID) AS topName,
+    (SELECT shoeName FROM shoes WHERE shoes.shoeID = o.shoeID) AS shoeName,
+    (SELECT hwName FROM headwear WHERE headwear.hwID = o.hwID) AS hwName,
+    (SELECT bagName FROM bags WHERE bags.bagID = o.bagID) AS bagName
+FROM 
+    outfit o;
     `;
     connection.query(query, (error, results) => {
       if (error) {
@@ -45,18 +41,13 @@ class Shop {
     SELECT 
     o.fitID,
     o.designerEmail,
-    b.bottomName as bottomName,
-    t.topName as topName,
-    s.shoeName as shoeName,
-    h.hwName as hwName,
-    bg.bagName as bagName
-  FROM outfit o
-  JOIN bottoms b ON o.bottomID = b.bottomID
-  JOIN tops t ON o.topID = t.topID
-  JOIN shoes s ON o.shoeID = s.shoeID
-  JOIN headwear h ON o.hwID = h.hwID
-  JOIN bags bg ON o.bagID = bg.bagID
-  WHERE o.designerEmail = ?;
+    (SELECT bottomName FROM bottoms WHERE bottomID = o.bottomID) as bottomName,
+    (SELECT topName FROM tops WHERE topID = o.topID) as topName,
+    (SELECT shoeName FROM shoes WHERE shoeID = o.shoeID) as shoeName,
+    (SELECT hwName FROM headwear WHERE hwID = o.hwID) as hwName,
+    (SELECT bagName FROM bags WHERE bagID = o.bagID) as bagName
+FROM outfit o
+WHERE o.designerEmail = ?;
     `;
     connection.query(query, [designerEmail], (error, results) => {
       if (error) {
