@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const Cart = require("../models/Cart.js");
+
+
 // Show the cart page
 router.get("/cart", (req, res) => {
     Cart.showCart(req.session.username, (error, cart) => {
