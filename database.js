@@ -1,10 +1,6 @@
 //required module for mysql
 const mysql = require('mysql2');
 
-require('dotenv').config({
-  path: './process.env'
-}); // Load the environment variables from .env file
-
 //create the connection the mysql server (LOCAL ONLY)
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
