@@ -5,7 +5,7 @@ const session = require("express-session");
 var app = express(); // init application as an express app
 
 app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 const PORT = 8080;  //set port number
 
 // create path to the dir w files
