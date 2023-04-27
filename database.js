@@ -1,6 +1,7 @@
 //required module for mysql
 const mysql = require('mysql2');
 
+
 //create the connection the mysql server (LOCAL ONLY)
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
