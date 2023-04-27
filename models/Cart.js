@@ -23,6 +23,17 @@ class Cart {
         callback(null, result);
       });
     }
+
+    static deleteFromCart(custID, fitID, callback) {
+      const query = "DELETE FROM cart WHERE custID = ? AND fitID = ?";
+      connection.query(query, [custID, fitID], (error, result) => {
+        if (error) {
+          console.error(error);
+          return callback(error, null);
+        }
+        callback(null, result);
+      });
+    }
   }
 
 module.exports = Cart;
