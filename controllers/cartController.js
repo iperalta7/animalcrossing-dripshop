@@ -3,13 +3,31 @@ const router = express.Router();
 
 // Show the cart page
 router.get("/cart", (req, res) => {
-    let user = req.session.username;
-    res.render("cart", 
-    {title: `${user}'s Cart`,
-    page_title:`${user}'s Cart`,
-    isLoggedIn: req.session.isLoggedIn}
-    );
+    Cart.showCart(req.session.username, (error, cart) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).send("Server error");
+        }
+        res.render("cart", {
+          title: "Drip Shop Page",
+          page_title: "Animal Drip Shop!",
+          isLoggedIn: req.session.isLoggedIn,
+          cart,
+        });
+      });
 });
 
+router.post("/cart", (req, res) => {
+    const custID = req.session.username;
+    const fitID = req.body.fitID;
+    // add the fitID to the cart table in the database
+    Cart.addFitToCart(custID, fitID, (error, result) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
+      }
+      res.redirect("/shop");
+    });
+  });
 
 module.exports = router;

@@ -15,24 +15,28 @@
             </div>
         </div>
     </form>
-
     <div class="row justify-content-center">
-        {{#each outfits}}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card bg-info text-white">
-                    <img src="clothes.png" class="card-img-top" style="width:200px" alt="Outfit Image">
-                    <div class="card-header">Outfit #{{fitID}}</div>
-                    <div class="card-body">
-                        <p class="card-text">Bottom: {{bottomName}}</p>
-                        <p class="card-text">Top: {{topName}}</p>
-                        <p class="card-text">Shoe: {{shoeName}}</p>
-                        <p class="card-text">Hardware: {{hwName}}</p>
-                        <p class="card-text">Bag: {{bagName}}</p>
-                        <button type="button" class="btn btn-light" onclick="addToCart({{fitID}})">Add to Cart</button>
-                    </div>
-                    <div class="card-footer bg-light text-dark">Designer: {{designerEmail}}</div>
-                </div>
-            </div>
-        {{/each}}
-    </div>
+    {{#each outfits}}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card bg-info text-white">
+  <img src="clothes.png" class="card-img-top" style="width:200px" alt="Outfit Image">
+  <div class="card-header">Outfit #{{fitID}}</div>
+  <div class="card-body">
+    <p class="card-text">Bottom: {{bottomName}}</p>
+    <p class="card-text">Top: {{topName}}</p>
+    <p class="card-text">Shoe: {{shoeName}}</p>
+    <p class="card-text">Hardware: {{hwName}}</p>
+    <p class="card-text">Bag: {{bagName}}</p>
+    <form action="/cart" method="post">
+      <input type="hidden" name="fitID" value="{{fitID}}">
+      <button type="submit" class="btn btn-light">Add to Cart</button>
+    </form>
+  </div>
+  <div class="card-footer bg-light text-dark">Designer: {{designerEmail}}</div>
 </div>
+    </div>
+    {{/each}}
+</div>
+</div>
+
+
