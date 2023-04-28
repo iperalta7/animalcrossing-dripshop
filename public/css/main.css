@@ -9,3 +9,78 @@
       background-color: #f2f2f2;
       padding: 25px;
     }
+
+    :root {
+      --color-primary: #74e0aa;
+      --color-secondary: #bee893;
+      --color-tertiary: #fbfeb2;
+      --color-accent: #dbbf9e;
+      --color-light: #c4d9a9;
+    }
+    
+    body {
+      background-color: var(--color-light);
+    }
+    
+    .navbar-dark {
+      background-color: var(--color-primary);
+    }
+    
+    .jumbotron {
+      background-color: var(--color-tertiary);
+    }
+    
+    .btn-primary {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    
+    .table-hover tbody tr:hover {
+      background-color: var(--color-secondary);
+    }
+    
+    .card {
+      background-color: hsl(158, 25%, 80%);
+      border-color: hsl(158, 25%, 60%);
+      }
+      
+      .card-header {
+      background-color: hsl(158, 50%, 40%);
+      color: #fff;
+      }
+      
+      .card-footer {
+      background-color: hsl(158, 50%, 40%);
+      border-color: hsl(158, 25%, 60%);
+      color: #fff;
+      }
+    
+    .alert {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+    
+    .text-primary {
+      color: var(--color-primary);
+    }
+    
+    .text-secondary {
+      color: var(--color-secondary);
+    }
+    
+    .text-tertiary {
+      color: var(--color-tertiary);
+    }
+    
+    .text-accent {
+      color: var(--color-accent);
+    }
+    
+    .text-light {
+      color: var(--color-light);
+    }
+    
+    .text-dark {
+      color: #000;
+    }
