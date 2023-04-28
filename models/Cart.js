@@ -3,15 +3,18 @@ const connection = require("../database.js")
 class Cart {
 
     static showCart(custID,callback) {
-        const query =`SELECT outfit.fitID, outfit.designerEmail, bottoms.bottomName, tops.topName, shoes.shoeName, headwear.hwName, bags.bagName
-        FROM outfit
-        JOIN bottoms ON outfit.bottomID = bottoms.bottomID
-        JOIN tops ON outfit.topID = tops.topID
-        JOIN shoes ON outfit.shoeID = shoes.shoeID
-        JOIN headwear ON outfit.hwID = headwear.hwID
-        JOIN bags ON outfit.bagID = bags.bagID
-        JOIN cart ON outfit.fitID = cart.fitID
-        WHERE cart.custID = ?;`;
+        const query =`SELECT 
+        outfit.fitID, 
+        outfit.designerEmail, 
+        (SELECT bottomName FROM bottoms WHERE bottoms.bottomID = outfit.bottomID) AS bottomName, 
+        (SELECT topName FROM tops WHERE tops.topID = outfit.topID) AS topName, 
+        (SELECT shoeName FROM shoes WHERE shoes.shoeID = outfit.shoeID) AS shoeName, 
+        (SELECT hwName FROM headwear WHERE headwear.hwID = outfit.hwID) AS hwName, 
+        (SELECT bagName FROM bags WHERE bags.bagID = outfit.bagID) AS bagName 
+      FROM 
+        outfit 
+      WHERE 
+        outfit.fitID IN (SELECT fitID FROM cart WHERE custID = ?);`;
         connection.query(query, [custID], (error, result) => {
           if (error) {
             console.error(error);
