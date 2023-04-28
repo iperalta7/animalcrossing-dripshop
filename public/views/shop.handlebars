@@ -19,14 +19,17 @@
   <div class="row justify-content-center">
     {{#each outfits}}
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card text-white">
+        <div class="card ">
           <img
             src="clothes.png"
             class="card-img-top"
             style="width:200px"
             alt="Outfit Image"
           />
-          <div class="card-header">Outfit #{{fitID}}</div>
+          <div class="card-header bg-dark">
+            <div class="row">
+            <div class="col">Outfit #{{fitID}}</div>
+            <div class="col"></div>Price: ${{total_price}}</div></div>
           <div class="card-body">
             <p class="card-text">Bottom: {{bottomName}}</p>
             <p class="card-text">Top: {{topName}}</p>
@@ -35,10 +38,11 @@
             <p class="card-text">Bag: {{bagName}}</p>
             <form action="/cart" method="post">
               <input type="hidden" name="fitID" value="{{fitID}}" />
-              <button type="submit" class="btn">Add to Cart</button>
+              <input type="hidden" name="total_price" value="{{total_price}}" />
+              <button type="submit" class="btn btn-primary">Add to Cart</button>
             </form>
           </div>
-          <div class="card-footer bg-light text-dark">Designer:
+          <div class="card-footer">Designer:
             {{designerEmail}}</div>
         </div>
       </div>

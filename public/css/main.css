@@ -40,8 +40,9 @@
     }
     
     .card {
-      background-color: hsl(158, 25%, 80%);
+      background-color: var(--color-tertiary);
       border-color: hsl(158, 25%, 60%);
+      color: black
       }
       
       .card-header {
