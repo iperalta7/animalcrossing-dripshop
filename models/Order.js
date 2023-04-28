@@ -3,9 +3,9 @@ const connection = require("../database.js");
 class Order {
   static getOrdersByCustomer(custID, callback) {
     connection.query(
-      `SELECT o.orderID,GROUP_CONCAT(oi.fitID) AS fitIDs
+      `SELECT o.orderID, GROUP_CONCAT(oi.fitID) AS fitIDs, o.price
        FROM \`order\` o
-       LEFT JOIN order_items oi ON o.orderID = oi.orderID
+       JOIN order_items oi ON o.orderID = oi.orderID
        WHERE o.custID = ?
        GROUP BY o.orderID`,
       [custID],
@@ -17,13 +17,13 @@ class Order {
         }
       }
     );
-  }
+}
 
-  static createOrder(custID, fitIDs, callback) {
+  static createOrder(custID, fitIDs, total, callback) {
     // Insert a new row into the order table with the custID
     connection.query(
-      "INSERT INTO `order` (`custID`) VALUES (?)",
-      [custID],
+      "INSERT INTO `order` (`custID`,`price`) VALUES (?,?)",
+      [custID,total],
       (error, result) => {
         if (error) {
           callback(error, null);

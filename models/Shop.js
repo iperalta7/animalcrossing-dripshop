@@ -12,16 +12,17 @@ class Shop {
    */
   static fetchAllOutfits(callback) {
     const query = `
-    SELECT 
-    o.fitID,
-    o.designerEmail,
-    (SELECT bottomName FROM bottoms WHERE bottoms.bottomID = o.bottomID) AS bottomName,
-    (SELECT topName FROM tops WHERE tops.topID = o.topID) AS topName,
-    (SELECT shoeName FROM shoes WHERE shoes.shoeID = o.shoeID) AS shoeName,
-    (SELECT hwName FROM headwear WHERE headwear.hwID = o.hwID) AS hwName,
-    (SELECT bagName FROM bags WHERE bags.bagID = o.bagID) AS bagName
+    SELECT o.fitID, o.designerEmail, b.price AS bottom_price,t.price AS top_price,s.price AS 
+      shoe_price,h.price AS hw_price,g.price AS bag_price,b.bottomName,t.topName,
+      s.shoeName,h.hwName, g.bagName,
+      (b.price + t.price + s.price + h.price + g.price) AS total_price
 FROM 
-    outfit o;
+    outfit o
+    JOIN bottoms b ON b.bottomID = o.bottomID
+    JOIN tops t ON t.topID = o.topID
+    JOIN shoes s ON s.shoeID = o.shoeID
+    JOIN headwear h ON h.hwID = o.hwID
+    JOIN bags g ON g.bagID = o.bagID;
     `;
     connection.query(query, (error, results) => {
       if (error) {
@@ -45,7 +46,12 @@ FROM
     (SELECT topName FROM tops WHERE topID = o.topID) as topName,
     (SELECT shoeName FROM shoes WHERE shoeID = o.shoeID) as shoeName,
     (SELECT hwName FROM headwear WHERE hwID = o.hwID) as hwName,
-    (SELECT bagName FROM bags WHERE bagID = o.bagID) as bagName
+    (SELECT bagName FROM bags WHERE bagID = o.bagID) as bagName,
+    ((SELECT price FROM bottoms WHERE bottomID = o.bottomID) +
+        (SELECT price FROM tops WHERE topID = o.topID) +
+        (SELECT price FROM shoes WHERE shoeID = o.shoeID) +
+        (SELECT price FROM headwear WHERE hwID = o.hwID) +
+        (SELECT price FROM bags WHERE bagID = o.bagID)) AS total_price
 FROM outfit o
 WHERE o.designerEmail = ?;
     `;
