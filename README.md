@@ -43,6 +43,10 @@ Start the server
   npm run start
 ```
 
+## Wesbite (sensitive), needs to be update
+https://animal-crossing-drip-shop.onrender.com
+Test user: test
+pw: Test1234
 
 ## Tech Stack
 
